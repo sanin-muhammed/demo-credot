@@ -5,8 +5,8 @@ const doc = {
     title: "Sample API",
     description: "API documentation for a sample project",
   },
-  host: "localhost:2001",
-  schemes: ["http"],
+  host: "demo-credot-user.onrender.com",
+  schemes: ["https"],
 };
 
 const outputFile = "./swagger-output.json";

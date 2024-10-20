@@ -5,9 +5,9 @@
     "description": "API documentation for Demo Credot project",
     "version": "1.0.0"
   },
-  "host": "localhost:2001",
+  "host": "demo-credot-user.onrender.com",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": ["https"],
   "paths": {
     "/api/auth/login": {
       "post": {
