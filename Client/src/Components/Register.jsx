@@ -9,13 +9,17 @@ import { enqueueSnackbar } from "notistack";
 const Register = () => {
   const navigate = useNavigate();
 
+  // form data states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // error handle states
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+
+  // submit login 
   const handleLoginSubmit = async () => {
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    if (!email || !/\S+@\S+\.\S+/.test(email)) { // email validation
       setEmailError(true);
       return;
     }
@@ -29,7 +33,7 @@ const Register = () => {
       formData.append("email", email);
       formData.append("password", password);
 
-      const response = await registerAction(formData);
+      const response = await registerAction(formData); // register action
       if (response.status) {
         enqueueSnackbar(response.message, { variant: "success" });
         localStorage.setItem("token", JSON.stringify(response.token));
@@ -43,6 +47,7 @@ const Register = () => {
     }
   };
 
+  // get token from localStorage
   const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
   useEffect(() => {
     if (token) {

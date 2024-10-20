@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setOrders } from "../Redux/reducers/orders";
 import { setUser } from "../Redux/reducers/user";
-import { Badge, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import { getAllOrdersAction } from "../Actions/OrderAction";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Extract datas from redux
   const { user } = useSelector((state) => state.user);
   const { orders } = useSelector((state) => state.orders);
 
@@ -28,7 +28,7 @@ const Orders = () => {
     }
   };
 
-  // set user data function
+  // set user data from local storage to the Redux
   const setUserData = () => {
     const userData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
     if (userData) {
@@ -48,6 +48,7 @@ const Orders = () => {
 
   return (
     <>
+      {/* navbar component */}
       <Navbar />
       <div style={{ padding: "40px 120px" }}>
         <table style={{ minWidth: "100%", borderCollapse: "collapse" }}>
@@ -83,7 +84,6 @@ const Orders = () => {
                     gap: "10px",
                     overflowX: "scroll",
                     scrollbarWidth: "none",
-                    // background:"red",
                     maxWidth: "400px",
                     "&::-webkit-scrollbar": {
                       display: "none",
@@ -113,6 +113,7 @@ const Orders = () => {
           </tbody>
         </table>
       </div>
+      {/* footer component */}
       <Footer />
     </>
   );

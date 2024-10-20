@@ -16,31 +16,31 @@ function App() {
       <Routes>
         <Route
           path="/login"
-          Component={Login}
+          Component={Login} // Login page
         />
         <Route
           path="/register"
-          Component={Register}
+          Component={Register} // Register page
         />
         <Route
           path="/"
-          Component={Home}
+          Component={Home} // Home page
         />
         <Route
           path="/productDetail"
-          Component={ProductDetail}
+          Component={ProductDetail} // Product detail page
         />
         <Route
           path="/cart"
-          Component={Cart}
+          Component={Cart} // Cart products list page 
         />
         <Route
           path="/orderSuccess"
-          Component={OrderSuccess}
+          Component={OrderSuccess} // Order success page
         />
         <Route
           path="/orders"
-          Component={Orders}
+          Component={Orders} // Orders list page
         />
       </Routes>
     </>

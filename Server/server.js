@@ -11,14 +11,15 @@ const OrderRoutes = require("./src/Routes/OrderRoutes");
 const app = express();
 require("dotenv").config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT; //port
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 app.use(morgan("dev"));
 
-connectDB();
+connectDB(); // connect database
 
+// Setting up API endpoints
 app.use("/api/auth",AuthRoutes)
 app.use("/api/products",ProductRoutes)
 app.use("/api/cart",CartRoutes)

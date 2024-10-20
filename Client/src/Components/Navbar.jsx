@@ -12,10 +12,13 @@ import { setOrders } from "../Redux/reducers/orders";
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Extracting datas from Redux
   const { cartCount } = useSelector((state) => state.cart);
   const { ordersCount } = useSelector((state) => state.orders);
   const { user } = useSelector((state) => state.user);
 
+  // profile menu states (MUI)
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -27,24 +30,25 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
+  // logout function
   const handleLogout = () => {
     handleClose();
-    localStorage.removeItem("token");
-    localStorage.removeItem("userData");
+    localStorage.removeItem("token"); // remove token from localStorage
+    localStorage.removeItem("userData"); // remove user data from localStorage
     dispatch(setUser(null));
     dispatch(setCart([]));
     dispatch(setOrders([]));
-    navigate("/login");
+    navigate("/login"); // navigate to login page
   };
 
   return (
     <header>
-      <img 
-        onClick={()=> navigate("/")}
+      <img
+        onClick={() => navigate("/")}
         src="../Logo.svg"
         alt="logo"
         width="120px"
-        style={{cursor:"pointer"}}
+        style={{ cursor: "pointer" }}
       />
       <Box
         sx={{
@@ -73,6 +77,7 @@ const Navbar = () => {
             </Tooltip>
           </Box>
         )}
+        {/* menu component (MUI) */}
         <Menu
           anchorEl={anchorEl}
           id="account-menu"
@@ -196,8 +201,6 @@ const Navbar = () => {
             </IconButton>
           </Tooltip>
         </Box>
-
-        
       </Box>
     </header>
   );

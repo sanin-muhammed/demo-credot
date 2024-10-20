@@ -18,38 +18,43 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Extracting data from Redux
   const { user } = useSelector((state) => state.user);
 
+  // get token from local storage
   const storedToken = localStorage.getItem("token");
   const token = storedToken ? JSON.parse(storedToken) : null;
 
+  // set user data from local storage to the Redux
   const setUserData = () => {
     const userData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
     dispatch(setUser(userData));
   };
+
   // get all products function
   const getAllProducts = async () => {
     const response = await getAllProductsAction();
     if (response.status) {
-      dispatch(setProducts(response.data));
+      dispatch(setProducts(response.data)); // set products to redux state
     } else if (response.error) {
       if (response.statusCode == 401) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userData");
         enqueueSnackbar(response.message, { variant: "error" });
         dispatch(setCart([]));
+        localStorage.removeItem("token");
+        localStorage.removeItem("userData");
         navigate("/login");
       } else {
         enqueueSnackbar(response.message, { variant: "error" });
       }
     }
   };
+
   // get all cart function
   const getCart = async () => {
     const response = await getCartAction(user?.userId);
     console.log(true);
     if (response.status) {
-      dispatch(setCart(response.data));
+      dispatch(setCart(response.data)); // set cart data to redux state
     } else if (response.error) {
       dispatch(setCart([]));
     }
@@ -59,7 +64,7 @@ const Home = () => {
   const getOrders = async () => {
     const response = await getAllOrdersAction(user?.userId);
     if (response.status) {
-      dispatch(setOrders(response.data));
+      dispatch(setOrders(response.data)); // set orders to redux state
     } else if (response.error) {
       dispatch(setOrders([]));
     }
@@ -84,6 +89,7 @@ const Home = () => {
   }, [user]);
   return (
     <>
+      {/* navbar component */}
       <Navbar />
       <div
         style={{
@@ -92,9 +98,12 @@ const Home = () => {
           gap: "10px",
         }}
       >
+        {/* image slider component */}
         <ImageSlider />
+        {/* product list component */}
         <Products />
       </div>
+      {/* footer component */}
       <Footer />
     </>
   );

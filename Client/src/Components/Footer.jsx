@@ -6,16 +6,17 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const icons = [{ icon: faFacebookF }, { icon: faTwitter }, { icon: faLinkedinIn }, { icon: faYoutube }];
   return (
     <footer>
       <img
-        onClick={()=> navigate("/")}
+        onClick={() => navigate("/")}
         src="../Logo.svg"
         alt="logo"
         width="120px"
-        style={{cursor:"pointer"}}
+        style={{ cursor: "pointer" }}
       />
       <div className="flex_div">
         <div>

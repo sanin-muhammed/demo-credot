@@ -12,15 +12,19 @@ import { addToCartAction } from "../Actions/CartAction";
 const ProductDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // Extracting datas from Redux
   const { productId } = useSelector((state) => state.products);
   const { product } = useSelector((state) => state.productDetail);
   const { user } = useSelector((state) => state.user);
+
 
   const [imageIndex, setImageIndex] = useState(0);
   const [colour, setColour] = useState("black");
   const [memory, setMemory] = useState("256 GB");
   const [count, setCount] = useState(1);
 
+  // sample datas
   const colours = ["black", "pink", "green", "gray", "darkblue"];
   const memories = ["256 GB", "512 GB", "1 TB", "128 GB"];
 
@@ -54,6 +58,7 @@ const ProductDetail = () => {
   }, [productId]);
   return (
     <>
+    {/* navbar component */}
       <Navbar />
       <div style={{ display: "flex", padding: "40px 120px", gap: "40px" }}>
         <Box sx={{ width: "400px" }}>
@@ -280,6 +285,7 @@ const ProductDetail = () => {
         variant="fullWidth"
         sx={{ bgcolor: "#DCDCDC", height: "1px", mt: 3, mb: 3, mx: "120px" }}
       />
+      {/* footer component */}
       <Footer />
     </>
   );

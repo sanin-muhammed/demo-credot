@@ -12,8 +12,10 @@ const cartSlice = createSlice({
     setCart(state, action) {
       state.cart = action.payload;
       console.log("cart =", action.payload);
+
+      // set cart count when the cart state is updated
       state.cartCount = state.cart?.length > 0 ? state.cart?.length : 0;
-      console.log("cart =", state.cart?.length);
+      console.log("cart count =", state.cart?.length);
     },
   },
 });

@@ -15,7 +15,7 @@ export const getAllProductsAction = async () => {
     return error.response.data;
   }
 };
-// Get Product Action
+// Get Product by id Action
 export const getProductAction = async (id) => {
   const token = JSON.parse(localStorage.getItem("token"));
   try {

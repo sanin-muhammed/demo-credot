@@ -10,14 +10,17 @@ const Products = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Extracting products data from Redux
   const { products } = useSelector((state) => state.products);
   const [product, setProduct] = useState();
 
+  // find selected product using product id 
   const handleSelectProduct = async (id) => {
     console.log({ id });
     const item = await products.find((item) => item._id === id);
     setProduct(item);
   };
+  // navigate product detail page with selected product  
   const handleProductId = async (id) => {
     dispatch(setProductId(id));
     navigate("/productDetail");
@@ -104,8 +107,8 @@ const Products = () => {
             "&::-webkit-scrollbar": {
               display: "none",
             },
-            "-ms-overflow-style": "none", // For Internet Explorer and Edge
-            "scrollbar-width": "none", // For Firefox
+            "-ms-overflow-style": "none", 
+            "scrollbar-width": "none", 
           }}
         >
           {products?.map((item, index) => (

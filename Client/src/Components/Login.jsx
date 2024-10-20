@@ -9,13 +9,17 @@ import { enqueueSnackbar } from "notistack";
 const Login = () => {
   const navigate = useNavigate();
 
+  // form data states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // error catch states
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+
+  // login submit function
   const handleLoginSubmit = async () => {
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    if (!email || !/\S+@\S+\.\S+/.test(email)) { // email validation
       setEmailError(true);
       return;
     }
@@ -32,15 +36,16 @@ const Login = () => {
       const response = await loginAction(formData);
       if (response.status) {
         enqueueSnackbar(response.message, { variant: "success" });
-        localStorage.setItem("token", JSON.stringify(response.token));
-        localStorage.setItem("userData", JSON.stringify(response.data));
-        navigate("/");
+        localStorage.setItem("token", JSON.stringify(response.token)); // set token to the localStorage
+        localStorage.setItem("userData", JSON.stringify(response.data)); // set user data to the localStorage
+        navigate("/"); // navigate to home page
       } else if (response.error) {
         enqueueSnackbar(response.message, { variant: "error" });
       }
     }
   };
 
+  // get token from localStorage
   const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
   useEffect(() => {
     if (token) {

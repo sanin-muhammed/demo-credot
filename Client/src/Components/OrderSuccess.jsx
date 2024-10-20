@@ -9,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 const OrderSuccess = () => {
   const navigate = useNavigate();
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(() => { // navigate to home page after 4 second 
       navigate("/");
-    }, 5000);
+    }, 4000);
   }, []);
   return (
     <>
+    {/* navbar component */}
       <Navbar />
       <div
         style={{
@@ -59,6 +60,7 @@ const OrderSuccess = () => {
           Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas placera
         </Typography>
       </div>
+      {/* footer component */}
       <Footer />
     </>
   );

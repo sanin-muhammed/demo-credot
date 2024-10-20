@@ -17,12 +17,15 @@ import { createOrderAction } from "../Actions/OrderAction";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // Extracting datas from Redux
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
 
-  const [cartId, setCartId] = useState("");
+  const [cartId, setCartId] = useState(""); // id from the selected cart
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // popup component states
   const [deleteOpen, setDeleteOpen] = useState(false);
   const handleDeleteOpen = (id) => {
     setCartId(id);
@@ -38,21 +41,20 @@ const Cart = () => {
     if (response.status) {
       dispatch(setCart(response.data));
     } else if (response.error) {
-      // enqueueSnackbar(response.message, { variant: "error" });
+      dispatch(setCart([]));
     }
   };
-  
-  // set user data function
+
+  // set user data from local storage to the Redux
   const setUserData = () => {
     const userData = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")) : null;
     if (userData) {
       dispatch(setUser(userData));
     } else {
-      
       navigate("/login");
     }
   };
-  
+
   // delete selected cart function
   const handleDeleteCart = async () => {
     const response = await deleteCartAction(cartId);
@@ -64,7 +66,7 @@ const Cart = () => {
       enqueueSnackbar(response.message, { variant: "error" });
     }
   };
-  
+
   // order submit function
   const handleOrderSubmit = async () => {
     const response = await createOrderAction({ userId: user.userId, products: cart, totalPrice });
@@ -91,6 +93,7 @@ const Cart = () => {
   }, [cart]);
   return (
     <>
+    {/* navbar component */}
       <Navbar />
       <div style={{ width: "100%", display: "flex", alignItems: "start", gap: "50px", padding: "40px 120px" }}>
         <Box sx={{ width: "65%" }}>
@@ -271,12 +274,15 @@ const Cart = () => {
           </Button>
         </ModalContent>
       </Modal>
+      {/* footer component */}
       <Footer />
     </>
   );
 };
 
 export default Cart;
+
+// popup component 
 const Backdrop = React.forwardRef((props, ref) => {
   const { open, className, ...other } = props;
   return (
