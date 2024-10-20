@@ -32,5 +32,5 @@ app.use("/api/orders", OrderRoutes);
 
 app.listen(PORT, () => {
   console.log("server running on port".bold, PORT.yellow.bold);
-  console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
+  
 });
